@@ -29,15 +29,11 @@ public class ListLoader extends AsyncTaskLoader<List<Item>> {
     public List<Item> loadInBackground() {
         Log.i(LOG_TAG,"This is loadInBackground() method");
         try{
-            return MovieRepository.fetchMovieDto(query,
-                getApplication()).ItemsList();
+            return MovieRepository.fetchMovieDto(query
+            ).ItemsList();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private Application getApplication() {
-        Context context = getContext();
-        return (Application) context.getApplicationContext();
-    }
 }
