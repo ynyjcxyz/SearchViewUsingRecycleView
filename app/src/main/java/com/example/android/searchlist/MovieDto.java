@@ -6,6 +6,10 @@ import com.ryanharter.auto.value.gson.GenerateTypeAdapter;
 
 import java.util.List;
 
+/**
+ * Please refer to the official documentation https://github.com/rharter/auto-value-gson#generatetypeadapter
+ * for reasons or AUTO_VALUE_JSON.md
+ */
 @GenerateTypeAdapter
 @AutoValue
 public abstract class MovieDto {

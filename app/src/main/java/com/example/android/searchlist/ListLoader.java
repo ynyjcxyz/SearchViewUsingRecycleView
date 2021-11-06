@@ -1,5 +1,6 @@
 package com.example.android.searchlist;
 
+import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 import androidx.annotation.NonNull;
@@ -28,9 +29,11 @@ public class ListLoader extends AsyncTaskLoader<List<Item>> {
     public List<Item> loadInBackground() {
         Log.i(LOG_TAG,"This is loadInBackground() method");
         try{
-            return MovieRepository.fetchMovieDto(query).ItemsList();
+            return MovieRepository.fetchMovieDto(query
+            ).ItemsList();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
 }
