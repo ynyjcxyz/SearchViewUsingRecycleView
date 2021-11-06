@@ -28,6 +28,7 @@ public class MovieDtoJsonTest {
 
   private MovieDto transformToEntity(String jsonContent) {
     Gson gson = new GsonBuilder()
+        .registerTypeAdapterFactory(GenerateTypeAdapter.FACTORY)
         .create();
     return gson.fromJson(jsonContent,MovieDto.class);
    }
