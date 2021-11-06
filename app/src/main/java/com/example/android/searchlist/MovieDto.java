@@ -6,6 +6,7 @@ import com.ryanharter.auto.value.gson.GenerateTypeAdapter;
 
 import java.util.List;
 
+@GenerateTypeAdapter
 @AutoValue
 public abstract class MovieDto {
     @SerializedName("page")
