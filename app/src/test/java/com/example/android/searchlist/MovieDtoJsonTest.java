@@ -1,6 +1,7 @@
 package com.example.android.searchlist;
 
-import com.google.common.truth.Truth;
+import static com.google.common.truth.Truth.assertThat;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.ryanharter.auto.value.gson.GenerateTypeAdapter;
@@ -17,7 +18,12 @@ public class MovieDtoJsonTest {
     String jsonContent = TestUtil.content("movie.json", this);
     MovieDto actual = transformToEntity(jsonContent);
 
-    Truth.assertThat(actual).isNotNull();
+    assertThat(actual).isNotNull();
+    assertThat(actual.page()).isEqualTo(1);
+    assertThat(actual.total_pages()).isEqualTo(500);
+    assertThat(actual.total_results()).isEqualTo(10000);
+    assertThat(actual.ItemsList()).hasSize(20);
+    assertThat(actual.ItemsList().get(18).title()).contains("Slayer");
   }
 
   private MovieDto transformToEntity(String jsonContent) {
