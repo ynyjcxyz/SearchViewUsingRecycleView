@@ -1,48 +1,21 @@
 package com.example.android.searchlist;
 
-public class MiniEntity {
+import com.google.auto.value.AutoValue;
+import com.google.gson.annotations.SerializedName;
+import com.ryanharter.auto.value.gson.GenerateTypeAdapter;
 
-  private final Integer id;
-  private final String name;
+@GenerateTypeAdapter
+@AutoValue
+public abstract class MiniEntity {
 
-  public MiniEntity(Integer id, String name) {
-    this.id = id;
-    this.name = name;
-  }
+  @SerializedName("id")
+  abstract Integer id();
 
-  public Integer id() {
-    return id;
-  }
-
-  public String name() {
-    return name;
-  }
+  @SerializedName("name")
+  abstract String name();
 
   public static MiniEntity create(Integer id, String name) {
-    return new MiniEntity(id, name);
+    return new AutoValue_MiniEntity(id, name);
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-
-    MiniEntity that = (MiniEntity) o;
-
-    if (!id.equals(that.id)) {
-      return false;
-    }
-    return name.equals(that.name);
-  }
-
-  @Override
-  public int hashCode() {
-    int result = id.hashCode();
-    result = 31 * result + name.hashCode();
-    return result;
-  }
 }
