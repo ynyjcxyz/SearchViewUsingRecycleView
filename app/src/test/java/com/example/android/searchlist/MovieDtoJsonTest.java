@@ -14,17 +14,17 @@ public class MovieDtoJsonTest {
   @Test
   public void testReadJsonFile() {
 
-    String jsonContent = TestUtil.content("mini.json", this);
-    MiniEntity actual = transformToEntity(jsonContent);
+    String jsonContent = TestUtil.content("movie.json", this);
+    MovieDto actual = transformToEntity(jsonContent);
 
     Truth.assertThat(actual).isNotNull();
   }
 
-  private MiniEntity transformToEntity(String jsonContent) {
+  private MovieDto transformToEntity(String jsonContent) {
     Gson gson = new GsonBuilder()
         .registerTypeAdapterFactory(GenerateTypeAdapter.FACTORY)
         .create();
-    return gson.fromJson(jsonContent,MiniEntity.class);
+    return gson.fromJson(jsonContent,MovieDto.class);
    }
 
 }
