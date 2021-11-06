@@ -1,21 +1,25 @@
 package com.example.android.searchlist;
 
-import com.google.auto.value.AutoValue;
-import com.google.gson.annotations.SerializedName;
-import com.ryanharter.auto.value.gson.GenerateTypeAdapter;
+public class MiniEntity {
 
-@GenerateTypeAdapter
-@AutoValue
-public abstract class MiniEntity {
+  private final Integer id;
+  private final String name;
 
-  @SerializedName("id")
-  abstract Integer id();
+  public MiniEntity(Integer id, String name) {
+    this.id = id;
+    this.name = name;
+  }
 
-  @SerializedName("name")
-  abstract String name();
+  public Integer id() {
+    return id;
+  }
+
+  public String name() {
+    return name;
+  }
 
   public static MiniEntity create(Integer id, String name) {
-    return new AutoValue_MiniEntity(id, name);
+    return new MiniEntity(id, name);
   }
 
 
