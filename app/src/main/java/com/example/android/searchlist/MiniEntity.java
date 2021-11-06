@@ -10,14 +10,18 @@ import java.util.List;
 @AutoValue
 public abstract class MiniEntity {
 
+//  com.google.gson.JsonSyntaxException:
+//  java.lang.IllegalStateException:
+//  Expected BEGIN_ARRAY but was NUMBER at line 2 column 10 path $.id
+
   @SerializedName("id")
-  abstract List<String> id();
+  abstract List<Integer> id();
 
   @SerializedName("name")
   abstract String name();
 
   public static MiniEntity create(Integer id, String name) {
-    return new AutoValue_MiniEntity(Collections.emptyList(), name);
+    return new AutoValue_MiniEntity(Collections.singletonList(id), name);
   }
 
 }
