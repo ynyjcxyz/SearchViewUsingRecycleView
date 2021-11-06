@@ -3,8 +3,6 @@ package com.example.android.searchlist;
 import static com.google.common.truth.Truth.assertThat;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.ryanharter.auto.value.gson.GenerateTypeAdapter;
 import org.junit.Test;
 import util.TestUtil;
 
@@ -27,7 +25,7 @@ public class MovieDtoJsonTest {
   }
 
   private MovieDto transformToEntity(String jsonContent) {
-    Gson gson =GsonProvider.get();
+    Gson gson = GsonUtil.get();
     return gson.fromJson(jsonContent,MovieDto.class);
    }
 

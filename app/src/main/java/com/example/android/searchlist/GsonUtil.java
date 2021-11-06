@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.ryanharter.auto.value.gson.GenerateTypeAdapter;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class GsonProvider {
+public class GsonUtil {
 
   public static Gson get() {
       Gson enhancedGson = new GsonBuilder()

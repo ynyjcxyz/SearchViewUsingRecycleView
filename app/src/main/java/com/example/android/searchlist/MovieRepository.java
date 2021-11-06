@@ -5,7 +5,6 @@ import com.chuckerteam.chucker.api.ChuckerInterceptor;
 import java.io.IOException;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MovieRepository {
     public static MovieDto fetchMovieDto(String apiKey, Application application) throws IOException{
@@ -13,7 +12,7 @@ public class MovieRepository {
         Retrofit retrofit = new Retrofit.Builder()
             .client(customized(application))
                 .baseUrl("https://api.themoviedb.org/3/")
-                .addConverterFactory(GsonProvider.factory())
+                .addConverterFactory(GsonUtil.factory())
                 .build();
         MovieService service = retrofit.create(MovieService.class);
 
