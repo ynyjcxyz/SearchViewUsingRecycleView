@@ -14,6 +14,6 @@ public class ExampleUnitTest {
 
   @Test
   public void addition_isCorrect() {
-    Truth.assertThat(2 + 2).isEqualTo(4);
+    Truth.assertThat(233444 + 22332).isEqualTo(255776);
   }
 }
