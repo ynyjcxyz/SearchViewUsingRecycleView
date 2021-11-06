@@ -15,13 +15,13 @@ public abstract class MiniEntity {
 //  Expected BEGIN_ARRAY but was NUMBER at line 2 column 10 path $.id
 
   @SerializedName("id")
-  abstract List<Integer> id();
+  abstract Integer id();
 
   @SerializedName("name")
   abstract String name();
 
   public static MiniEntity create(Integer id, String name) {
-    return new AutoValue_MiniEntity(Collections.singletonList(id), name);
+    return new AutoValue_MiniEntity(id, name);
   }
 
 }
