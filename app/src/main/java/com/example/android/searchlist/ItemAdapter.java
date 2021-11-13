@@ -36,7 +36,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
         myViewHolder.container.setOnClickListener(v -> {
             String message = items.get(position).id().toString();
             Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-//            Intent intent = new Intent(context, MovieDetail.class);
+//            Intent intent = new Intent(context, MovieDetailView.class);
 //            intent.putExtra("message",message);
 //            context.startActivity(intent);
         });
