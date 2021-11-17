@@ -16,13 +16,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @SuppressWarnings("ALL")
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Item>> {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Item>>{
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
     private static final String API_KEY =
             "f16105c3c8be65f8d91bf05a968202f1";
@@ -55,14 +53,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
-    public void onLoadFinished(@NonNull Loader<List<Item>> loader, List<Item> data) {
+    public void onLoadFinished(@NonNull Loader<List<Item>> loader, List<Item> data){
         Log.i(LOG_TAG, "This is onLoadFinished() callback");
         mAdapter = new ItemAdapter(getApplicationContext(), data);
         mRecyclerView.setAdapter(mAdapter);
-
         items.addAll(data);
+
         Log.i(LOG_TAG, "Items: " + items.toString());
     }
+
 
     @Override
     public void onLoaderReset(@NonNull Loader loader) {

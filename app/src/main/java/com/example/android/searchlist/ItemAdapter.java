@@ -1,22 +1,26 @@
 package com.example.android.searchlist;
 
+import static android.content.ContentValues.TAG;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import java.util.List;
+import java.util.Objects;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> {
-    private final Context context;
+    private Context context;
     private final List<Item> items;
 
     public ItemAdapter(Context context, List<Item> items) {
@@ -33,13 +37,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, @SuppressLint("RecyclerView") final int position){
-        myViewHolder.container.setOnClickListener(v -> {
-            String message = items.get(position).id().toString();
-            Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-//            Intent intent = new Intent(context, MovieDetailView.class);
-//            intent.putExtra("message",message);
-//            context.startActivity(intent);
-        });
 
         Glide.with(context).load("https://image.tmdb.org/t/p/w500" + items.get(position).backdrop_path()).error(R.drawable.no_data).into(myViewHolder.img);
 
@@ -48,6 +45,23 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
         myViewHolder.title.setText( items.get(position).title());
 
         myViewHolder.release_date.setText( items.get(position).release_date());
+
+//        myViewHolder.container.setOnClickListener(view -> {
+//            String MovieId = Objects.requireNonNull(items.get(position).id()).toString();
+//            Toast.makeText(context, MovieId, Toast.LENGTH_LONG).show();
+//        });
+
+        myViewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String MovieId = Objects.requireNonNull(items.get(position).id()).toString();
+                Toast.makeText(context, MovieId, Toast.LENGTH_LONG).show();
+
+//                Intent intent = new Intent(context, MovieDetailView.class);
+//                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -55,7 +69,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
         return items.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        LinearLayout parentLayout;
         View container;
         ImageView img;
         TextView original_title;
@@ -64,11 +79,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
 
         public MyViewHolder(View view) {
             super(view);
+            context = view.getContext();
             container = view;
             img = view.findViewById(R.id.img);
             original_title = view.findViewById(R.id.original_title);
             title = view.findViewById(R.id.title);
             release_date = view.findViewById(R.id.release_date);
+            parentLayout = itemView.findViewById(R.id.parent_layout);
         }
     }
 }
