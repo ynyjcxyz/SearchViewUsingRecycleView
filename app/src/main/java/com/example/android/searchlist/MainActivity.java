@@ -16,19 +16,20 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-@SuppressWarnings("ALL")
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Item>>{
+public class MainActivity extends AppCompatActivity
+        implements LoaderManager.LoaderCallbacks<List<Item>> {
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
     private static final String API_KEY =
             "f16105c3c8be65f8d91bf05a968202f1";
     private static final int DATA_LOADER_ID = 1;
-
-    private List<Item> items = new ArrayList<>();
+    private final List<Item> items = new ArrayList<>();
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private ItemAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
@@ -42,7 +43,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         Log.i(LOG_TAG, "This is initLoader()");
-        LoaderManager.getInstance(this).initLoader(DATA_LOADER_ID, null, this).forceLoad();
+        LoaderManager.getInstance(this)
+                .initLoader(DATA_LOADER_ID, null, this).forceLoad();
     }
 
     @NonNull
@@ -53,19 +55,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
-    public void onLoadFinished(@NonNull Loader<List<Item>> loader, List<Item> data){
+    public void onLoadFinished(@NonNull Loader<List<Item>> loader, List<Item> data) {
         Log.i(LOG_TAG, "This is onLoadFinished() callback");
-        mAdapter = new ItemAdapter(getApplicationContext(), data);
+
+        mAdapter = new ItemAdapter(MainActivity.this, data);
         mRecyclerView.setAdapter(mAdapter);
+
         items.addAll(data);
-
         Log.i(LOG_TAG, "Items: " + items.toString());
-    }
-
-
-    @Override
-    public void onLoaderReset(@NonNull Loader loader) {
-        loader.reset();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -73,24 +70,37 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         menuInflater.inflate(R.menu.menu_main_activity, menu);
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchManager searchManager = (SearchManager) getApplicationContext().getSystemService(Context.SEARCH_SERVICE);
+        SearchManager searchManager = (SearchManager) getApplicationContext()
+                .getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = null;
+
         if (searchItem != null) {
             searchView = (SearchView) searchItem.getActionView();
         }
         if (searchView != null) {
-            searchView.setSearchableInfo(searchManager.getSearchableInfo(MainActivity.this.getComponentName()));
+            searchView
+                    .setSearchableInfo
+                            (searchManager
+                                    .getSearchableInfo
+                                            (MainActivity.this.getComponentName()));
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextChange(String newText) {
                     List<Item> newList = new ArrayList<>();
                     for (Item item : items) {
-                        if (item.original_title().toLowerCase().contains(newText.toLowerCase())
-                                || item.title().toLowerCase().contains(newText.toLowerCase())) {
+                        if (Objects
+                                .requireNonNull(item.original_title())
+                                .toLowerCase()
+                                .contains(newText.toLowerCase())
+                                || Objects
+                                .requireNonNull(item.title())
+                                .toLowerCase()
+                                .contains(newText.toLowerCase())
+                        ) {
                             newList.add(item);
                         }
                     }
-                    mAdapter = new ItemAdapter(getApplicationContext(), newList);
+                    mAdapter = new ItemAdapter(MainActivity.this, newList);
                     mRecyclerView.setAdapter(mAdapter);
                     return true;
                 }
@@ -101,8 +111,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 }
             });
         }
-
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    public void onLoaderReset(@NonNull Loader loader) {
+        Log.i(LOG_TAG, "This is onLoaderReset method");
+        loader.reset();
+        items.clear();
+        mRecyclerView.removeAllViews();
+        mLayoutManager.removeAllViews();
+    }
 }

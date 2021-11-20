@@ -1,6 +1,7 @@
 package com.example.android.searchlist;
 
 import androidx.annotation.Nullable;
+
 import com.google.auto.value.AutoValue;
 import com.google.gson.annotations.SerializedName;
 import com.ryanharter.auto.value.gson.GenerateTypeAdapter;
@@ -25,6 +26,14 @@ public abstract class Item {
     abstract String original_title();
 
     @Nullable
+    @SerializedName("overview")
+    abstract String overview();
+
+    @Nullable
+    @SerializedName("poster_path")
+    abstract String poster_path();
+
+    @Nullable
     @SerializedName("release_date")
     abstract String release_date();
 
@@ -32,7 +41,20 @@ public abstract class Item {
     @SerializedName("title")
     abstract String title();
 
-    public static Item create(String backdrop_path , Integer id , String original_language , String original_title , String release_date , String title){
-        return new AutoValue_Item(backdrop_path, id , original_language , original_title , release_date , title);
+    @Nullable
+    @SerializedName("vote_average")
+    abstract String vote_average();
+
+    @Nullable
+    @SerializedName("vote_count")
+    abstract String vote_count();
+
+    public static Item create(String backdrop_path, Integer id, String original_language,
+                              String original_title, String overview, String poster_path,
+                              String release_date, String title, String vote_average,
+                              String vote_count) {
+        return new AutoValue_Item(backdrop_path, id, original_language,
+                original_title, overview, poster_path,
+                release_date, title, vote_average, vote_count);
     }
 }
