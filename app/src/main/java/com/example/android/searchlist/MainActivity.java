@@ -42,9 +42,9 @@ public class MainActivity extends AppCompatActivity
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        Log.i(LOG_TAG, "This is initLoader()");
         LoaderManager.getInstance(this)
                 .initLoader(DATA_LOADER_ID, null, this).forceLoad();
+        Log.i(LOG_TAG, "This is initLoader()");
     }
 
     @NonNull
@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity
 
         mAdapter = new ItemAdapter(MainActivity.this, data);
         mRecyclerView.setAdapter(mAdapter);
+
+        //Objects.requireNonNull(mRecyclerView.getAdapter()).setStateRestorationPolicy(RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY);
 
         items.addAll(data);
         Log.i(LOG_TAG, "Items: " + items.toString());

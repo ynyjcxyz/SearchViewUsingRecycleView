@@ -48,14 +48,14 @@ public class MovieDetailView extends AppCompatActivity {
         String vote_countText = getIntent().getStringExtra("vote_count");
 
         main_title.setText(title);
-        main_original_title.setText("Original Title: " + original_title);
+        main_original_title.setText(original_title);
 
         Glide.with(MovieDetailView.this)
                 .load("https://image.tmdb.org/t/p/w500" + poster_path)
                 .error(R.drawable.no_data)
                 .into(poster_img);
 
-        overview.setText("Overview: " + overviewText);
+        overview.setText(overviewText);
         country.setText("Original Language: " + original_language.toUpperCase(Locale.ROOT));
         vote_average.setText("Average Vote: " + vote_averageText + "/10");
         vote_count.setText("Vote Count: " + vote_countText);

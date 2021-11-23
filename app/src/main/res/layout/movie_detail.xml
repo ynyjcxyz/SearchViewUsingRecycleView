@@ -11,6 +11,8 @@
 
         <TextView
             android:id="@+id/main_title"
+            android:typeface="sans"
+            android:background="#7ED5FD"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -20,6 +22,7 @@
 
         <TextView
             android:id="@+id/main_original_title"
+            android:background="#CAE5FB"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -28,11 +31,13 @@
 
         <ImageView
             android:id="@+id/poster_img"
+            android:background="#F4CAFB"
             android:layout_width="match_parent"
-            android:layout_height="512dp" />
+            android:layout_height="360dp" />
 
         <TextView
             android:id="@+id/overview"
+            android:background="#F4CAFB"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -41,6 +46,7 @@
 
         <TextView
             android:id="@+id/country"
+            android:background="#B8E9FF"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -49,6 +55,7 @@
 
         <TextView
             android:id="@+id/vote_average"
+            android:background="#B8E9FF"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -57,6 +64,7 @@
 
         <TextView
             android:id="@+id/vote_count"
+            android:background="#B8E9FF"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
