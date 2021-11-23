@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
+        mAdapter = new ItemAdapter(MainActivity.this);
+        mRecyclerView.setAdapter(mAdapter);
+
         LoaderManager.getInstance(this)
                 .initLoader(DATA_LOADER_ID, null, this).forceLoad();
         Log.i(LOG_TAG, "This is initLoader()");
@@ -57,14 +60,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onLoadFinished(@NonNull Loader<List<Item>> loader, List<Item> data) {
         Log.i(LOG_TAG, "This is onLoadFinished() callback");
-
-        mAdapter = new ItemAdapter(MainActivity.this, data);
-        mRecyclerView.setAdapter(mAdapter);
-
-        //Objects.requireNonNull(mRecyclerView.getAdapter()).setStateRestorationPolicy(RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY);
-
-        items.addAll(data);
-        Log.i(LOG_TAG, "Items: " + items.toString());
+        Log.i(LOG_TAG, "Items: " + data.toString());
+        mAdapter.setData(data);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -102,8 +99,7 @@ public class MainActivity extends AppCompatActivity
                             newList.add(item);
                         }
                     }
-                    mAdapter = new ItemAdapter(MainActivity.this, newList);
-                    mRecyclerView.setAdapter(mAdapter);
+                    mAdapter.setData(newList);
                     return true;
                 }
 
