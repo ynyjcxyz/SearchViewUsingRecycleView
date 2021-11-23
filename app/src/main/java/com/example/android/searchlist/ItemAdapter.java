@@ -11,18 +11,25 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> {
     private final Context context;
-    private final List<Item> items;
+    private final List<Item> items = new ArrayList<>();
 
-    public ItemAdapter(Context context, List<Item> items) {
+    public ItemAdapter(Context context) {
         this.context = context;
-        this.items = items;
+    }
+
+    public void setData(List<Item> newList){
+        items.clear();
+        items.addAll(newList);
+        notifyDataSetChanged();
     }
 
     @NonNull
